@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://pda.ft.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://pda.ft.com" xmlns:intf="http://pda.ft.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://pda.ft.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="PDACall">
+    <complexType>
+     <sequence>
+      <element name="function" type="xsd:string"/>
+      <element name="args" type="xsd:string"/>
+      <element name="dbstring" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="PDACallResponse">
+    <complexType>
+     <sequence>
+      <element name="PDACallReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="PDACallRequest">
+
+      <wsdl:part element="impl:PDACall" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="PDACallResponse">
+
+      <wsdl:part element="impl:PDACallResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="PDAServices">
+
+      <wsdl:operation name="PDACall">
+
+         <wsdl:input message="impl:PDACallRequest" name="PDACallRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:PDACallResponse" name="PDACallResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="PDAServicesSoapBinding" type="impl:PDAServices">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="PDACall">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="PDACallRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="PDACallResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="PDAServicesService">
+
+      <wsdl:port binding="impl:PDAServicesSoapBinding" name="PDAServices">
+
+         <wsdlsoap:address location="http://localhost:8080/PDAWebServices/services/PDAServices"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

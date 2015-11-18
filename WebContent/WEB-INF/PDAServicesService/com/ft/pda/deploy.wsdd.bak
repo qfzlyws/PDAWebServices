@@ -1,0 +1,31 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from PDAServicesService WSDL service -->
+
+  <service name="PDAServices" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://pda.ft.com"/>
+      <parameter name="wsdlServiceElement" value="PDAServicesService"/>
+      <parameter name="schemaQualified" value="http://pda.ft.com"/>
+      <parameter name="wsdlServicePort" value="PDAServices"/>
+      <parameter name="className" value="com.ft.pda.PDAServicesSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="PDAServices"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="PDACall" qname="operNS:PDACall" xmlns:operNS="http://pda.ft.com" returnQName="retNS:PDACallReturn" xmlns:retNS="http://pda.ft.com" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:function" xmlns:pns="http://pda.ft.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:args" xmlns:pns="http://pda.ft.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:dbstring" xmlns:pns="http://pda.ft.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="PDACall"/>
+
+  </service>
+</deployment>
